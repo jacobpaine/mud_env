@@ -10,10 +10,15 @@ var gfs;
 var Grid = require("gridfs-stream");
 var path = require('path');
 var url = process.env.MONGODB_URI || "mongodb://localhost/mud_env";
+var bodyParser = require('body-parser');
+
+
+
 
 mongoose.connect(url);
 Grid.mongo = mongoose.mongo;
-
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
