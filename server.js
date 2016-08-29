@@ -9,8 +9,9 @@ var conn = mongoose.connection;
 var gfs;
 var Grid = require("gridfs-stream");
 var path = require('path');
+var url = process.env.MONGODB_URI || "mongodb://localhost/mud_env";
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/mud_env");
+mongoose.connect(url);
 Grid.mongo = mongoose.mongo;
 
 app.use(express.static(path.join(__dirname, 'public')));
@@ -20,6 +21,10 @@ app.use('/', routes);
 app.set("view engine", "ejs");
 app.set("views", "./views");
 
-if (!module.parent) {
-  app.listen(3000);
-}
+// if (!module.parent) {
+//   app.listen(3000);
+// }
+var server = app.listen(process.env.PORT || 3000, function () {
+  var port = server.address().port;
+  console.log("App now running on port", port);
+});
