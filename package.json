@@ -11,6 +11,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "ejs": "^1.0.0",
     "express": "^4.14.0",
     "gridfs-stream": "^1.1.1",
     "mongoose": "^4.5.10",

@@ -11,6 +11,7 @@ var Grid = require("gridfs-stream");
 
 conn.once("open", function(){
   gfs = Grid(conn.db);
+
   router.get("/", function(req,res){
     //renders a multipart/form-data form
     res.render("index");
