@@ -11,7 +11,7 @@ var Grid = require("gridfs-stream");
 var path = require('path');
 var url = process.env.MONGODB_URI || "mongodb://localhost/mud_env";
 var bodyParser = require('body-parser');
-
+var favicon = require('serve-favicon');
 
 
 
