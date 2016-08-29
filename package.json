@@ -13,6 +13,8 @@
     "express": "^4.14.0",
     "gridfs-stream": "^1.1.1",
     "mongoose": "^4.5.10",
-    "multer": "^1.2.0"
+    "multer": "^1.2.0",
+    "body-parser": "1.15.2",
+    "serve-favicon": "2.3.0"
   }
 }
