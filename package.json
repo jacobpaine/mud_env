@@ -1,6 +1,9 @@
 {
   "name": "mud_env",
   "version": "1.0.0",
+  "engines": {
+    "node": "6.2.1"
+  },
   "description": "",
   "main": "server.js",
   "scripts": {
