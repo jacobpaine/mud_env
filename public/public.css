@@ -1,4 +1,7 @@
 .roomImage {
-  height: 55px;
-  width: 55px;
+  width: 155px;
+}
+
+div {
+  color: red;
 }
