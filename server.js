@@ -13,8 +13,6 @@ var url = process.env.MONGODB_URI || "mongodb://localhost/mud_env";
 var bodyParser = require('body-parser');
 var favicon = require('serve-favicon');
 
-
-
 mongoose.connect(url);
 Grid.mongo = mongoose.mongo;
 app.use(bodyParser.json());
