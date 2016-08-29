@@ -1,0 +1,31 @@
+<h2>Room #{{ room_id }}</h2>
+<br>
+  <div ng-repeat="room in rooms">
+    <div ng-if="room.roomName == 'room' + room_num">
+      <p id="roomLong">{{ room.long_desc }}</p>
+      <hr>
+      <p>The obvious exits are:</p>
+      <span class="exits" ng-if="room.exit.north">
+        <span> North </span>
+      </span>
+      <span class="exits" ng-if="room.exit.south">
+        <span>South </span>
+      </span>
+      <span class="exits" ng-if="room.exit.east">
+        <span>East </span>
+      </span>
+      <span class="exits" ng-if="room.exit.west">
+        <span>West </span>
+      </span>
+      <span class="roomImage" ng-if="room.image">
+        <img src="{{ room.image }}">{{ room.image }}</img>
+      </span>
+  </div>
+</div>
+<hr>
+<p>{{ gameMessage }}</p>
+<form ng-submit="inputFunc(text)">
+  Enter text and hit enter:
+  <input id="primaryInputBox" type="text" ng-model="text" name="text" autofocus/>
+  <input type="submit" id="submit" value="Submit" />
+</form>

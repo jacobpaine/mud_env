@@ -1,0 +1,21 @@
+{
+  "name": "mud_env",
+  "version": "0.0.7",
+  "dependencies": {
+    "angular": "~1.5.8"
+  },
+  "homepage": "https://github.com/jacobpaine/mud_env",
+  "authors": [
+    "Jacob Paine <painejacob@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
