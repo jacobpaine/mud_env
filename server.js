@@ -10,7 +10,7 @@ var gfs;
 var Grid = require("gridfs-stream");
 var path = require('path');
 
-mongoose.connect("mongodb://localhost/mud_env");
+mongoose.connect("process.env.MONGODB_URI" || "mongodb://localhost/mud_env");
 Grid.mongo = mongoose.mongo;
 
 app.use(express.static(path.join(__dirname, 'public')));
