@@ -25,7 +25,6 @@
     width: 330px;
   }
 
-
   .toy {
     display: inline-block;
     width: 55px;
@@ -33,12 +32,13 @@
   }
 
   .exitList{
+    float: right;
   }
 
   .playerControls {
     margin-left: 200px;
     margin-top: -50px;
-
+    float: right;
   }
   .playerControls input{
     margin: 2px;
@@ -61,15 +61,21 @@
     #largeRoomImageBox{
       width: 45%;
       margin-right: 5px;
+      margin: auto;
     }
     #largeToyBox {
       width: 10%;
       margin-left: 10px;
     }
+    .roomTextBox{
+      margin-bottom: 325px;
+      margin-left: 50px;
+    }
     #largeTextBox {
       width: 40%;
       padding: 15px;
       margin-left: -15px;
+      vertical-align: middle;
     }
     .roomImage {
       margin-top: -210px;
@@ -84,10 +90,12 @@
     }
     .exitList{
       width: 200px;
-      float: right;
+      float:right;
+      margin-top: -180px;
     }
 
     .playerControls {
+      margin-top: -290px;
       float: right;
     }
     .playerControls input{
