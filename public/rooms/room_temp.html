@@ -1,31 +1,75 @@
 <h2>Room #{{ room_id }}</h2>
 <br>
-  <div ng-repeat="room in rooms">
+  <div class="container-fluid" ng-repeat="room in rooms">
     <div ng-if="room.roomName == 'room' + room_num">
-      <p id="roomLong">{{ room.long_desc }}</p>
-      <hr>
-      <p>The obvious exits are:</p>
-      <span class="exits" ng-if="room.exit.north">
-        <span> North </span>
-      </span>
-      <span class="exits" ng-if="room.exit.south">
-        <span>South </span>
-      </span>
-      <span class="exits" ng-if="room.exit.east">
-        <span>East </span>
-      </span>
-      <span class="exits" ng-if="room.exit.west">
-        <span>West </span>
-      </span>
-      <div class="roomImageBox" ng-if="room.image">
-        <img width="255px" class="roomImage" src="{{ room.image }}"></img>
+      <div class="container-fluid">
+        <span id="smallRoomImageBox" class="roomImageBox show-hide-small" ng-if="room.image">
+          <img class="roomImage" src="{{ room.image }}"></img>
+        </span>
+        <span id="largeRoomImageBox" class="roomImageBox show-hide-large" ng-if="room.image">
+          <img class="roomImage" src="{{ room.image }}"></img>
+        </span>
+        <div id="smallToyBox" class="roomToyBox show-hide-small row">
+          <img id="toyOne" class="toy" src="{{ room.image }}"></img>
+          <img id="toyTwo" class="toy" src="{{ room.image }}"></img>
+          <img id="toyThree" class="toy" src="{{ room.image }}"></img>
+          <img id="toyFour" class="toy" src="{{ room.image }}"></img>
+          <img id="toyFive" class="toy" src="{{ room.image }}"></img>
+        </div>
+        <div id="largeToyBox" class="roomToyBox show-hide-large">
+          <img id="toyOne" class="toy" src="{{ room.image }}"></img>
+          <img id="toyTwo" class="toy" src="{{ room.image }}"></img>
+          <img id="toyThree" class="toy" src="{{ room.image }}"></img>
+          <img id="toyFour" class="toy" src="{{ room.image }}"></img>
+          <img id="toyFive" class="toy" src="{{ room.image }}"></img>
+        </div>
+        <div id="smallTextBox" class="roomTextBox show-hide-small" ng-if="room.image">
+          <p id="roomLong">{{ room.long_desc }}</p>
+        </div>
+        <div id="largeTextBox" class="roomTextBox show-hide-large" ng-if="room.image">
+          <p id="roomLong">{{ room.long_desc }}</p>
+        </div>
       </div>
+      <div class="exitList show-hide-small col-xs-6 col-sm-6">
+
+        <p>The obvious exits are:</p>
+        <span class="exits" ng-if="room.exit.north">
+          <span> North </span>
+        </span>
+        <span class="exits" ng-if="room.exit.south">
+          <span>South </span>
+        </span>
+        <span class="exits" ng-if="room.exit.east">
+          <span>East </span>
+        </span>
+        <span class="exits" ng-if="room.exit.west">
+          <span>West </span>
+        </span>
+      </div> <!-- End exitList small-->
+      <div class="exitList show-hide-large">
+        <hr>
+        <p>The obvious exits are:</p>
+        <span class="exits" ng-if="room.exit.north">
+          <span> North </span>
+        </span>
+        <span class="exits" ng-if="room.exit.south">
+          <span>South </span>
+        </span>
+        <span class="exits" ng-if="room.exit.east">
+          <span>East </span>
+        </span>
+        <span class="exits" ng-if="room.exit.west">
+          <span>West </span>
+        </span>
+        <hr>
+      </div> <!-- End exitList large-->
+    </div> <!-- End specific room iteration -->
+  </div> <!--  End all room iteration -->
+  <div class="playerControls">
+    <p>{{ gameMessage }}</p>
+    <form ng-submit="inputFunc(text)">
+      <p>Enter text and hit enter:</p>
+      <input id="primaryInputBox" type="text" ng-model="text" name="text" autofocus/>
+      <input type="submit" id="submit" value="Submit" />
+    </form>
   </div>
-</div>
-<hr>
-<p>{{ gameMessage }}</p>
-<form ng-submit="inputFunc(text)">
-  Enter text and hit enter:
-  <input id="primaryInputBox" type="text" ng-model="text" name="text" autofocus/>
-  <input type="submit" id="submit" value="Submit" />
-</form>

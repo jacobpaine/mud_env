@@ -1,0 +1,97 @@
+@media screen and (min-width: 0px) and (max-width: 768px) {
+  div {
+      background-color: lightgreen;
+  }
+  .show-hide-small{
+    display: inline-block !important;
+  }
+  .show-hide-large{
+    display: none !important;
+  }
+
+  #smallRoomImageBox{
+    margin: auto;
+  }
+  #smallToyBox {
+    margin-left: 10px;
+    width: 500px;
+  }
+  #smallTextBox {
+    margin: auto;
+    width: 85%;
+  }
+
+  .roomImage {
+    width: 330px;
+  }
+
+
+  .toy {
+    display: inline-block;
+    width: 55px;
+    margin: 1px;
+  }
+
+  .exitList{
+  }
+
+  .playerControls {
+    margin-left: 200px;
+    margin-top: -50px;
+
+  }
+  .playerControls input{
+    margin: 2px;
+  }
+
+}
+
+@media screen and (min-width: 768px) and (max-width: 1500px) {
+    .show-hide-small{
+      display:none !important;
+      background-color: purple;
+    }
+    .show-hide-large{
+      display: inline-block !important;
+    }
+    div {
+      background-color: red;
+    }
+
+    #largeRoomImageBox{
+      width: 45%;
+      margin-right: 5px;
+    }
+    #largeToyBox {
+      width: 10%;
+      margin-left: 10px;
+    }
+    #largeTextBox {
+      width: 40%;
+      padding: 15px;
+      margin-left: -15px;
+    }
+    .roomImage {
+      margin-top: -210px;
+      width: 100%;
+    }
+    .toy{
+      width: 75%;
+      margin-bottom: 2px;
+    }
+    #roomLong {
+      width: 100%;
+    }
+    .exitList{
+      width: 200px;
+      float: right;
+    }
+
+    .playerControls {
+      float: right;
+    }
+    .playerControls input{
+      margin: 2px;
+    }
+
+}
