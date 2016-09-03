@@ -1,6 +1,6 @@
 <h2>Room #{{ room_id }}</h2>
 <br>
-  <div class="container-fluid" ng-repeat="room in rooms">
+  <div id="room-box" class="container-fluid" ng-repeat="room in rooms">
     <div ng-if="room.roomName == 'room' + room_num">
       <div class="container-fluid">
         <span id="smallRoomImageBox" class="roomImageBox show-hide-small" ng-if="room.image">
