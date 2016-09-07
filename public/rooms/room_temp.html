@@ -1,34 +1,32 @@
 <h2>Room #{{ room_id }}</h2>
 <br>
-  <div id="room-box" class="container-fluid" ng-repeat="room in rooms">
+  <div id="room-box" class="container" ng-repeat="room in rooms">
     <div ng-if="room.roomName == 'room' + room_num">
-      <div class="container-fluid">
-        <span id="smallRoomImageBox" class="roomImageBox show-hide-small" ng-if="room.image">
-          <img class="roomImage" src="{{ room.image }}"></img>
-        </span>
-        <span id="largeRoomImageBox" class="roomImageBox show-hide-large" ng-if="room.image">
-          <img class="roomImage" src="{{ room.image }}"></img>
-        </span>
-        <div id="smallToyBox" class="roomToyBox show-hide-small row">
-          <img id="toyOne" class="toy" src="{{ room.image }}"></img>
-          <img id="toyTwo" class="toy" src="{{ room.image }}"></img>
-          <img id="toyThree" class="toy" src="{{ room.image }}"></img>
-          <img id="toyFour" class="toy" src="{{ room.image }}"></img>
-          <img id="toyFive" class="toy" src="{{ room.image }}"></img>
-        </div>
-        <div id="largeToyBox" class="roomToyBox show-hide-large">
-          <img id="toyOne" class="toy" src="{{ room.image }}"></img>
-          <img id="toyTwo" class="toy" src="{{ room.image }}"></img>
-          <img id="toyThree" class="toy" src="{{ room.image }}"></img>
-          <img id="toyFour" class="toy" src="{{ room.image }}"></img>
-          <img id="toyFive" class="toy" src="{{ room.image }}"></img>
-        </div>
-        <div ng-mousemove="showSelectedText()" id="smallTextBox" class="roomTextBox show-hide-small" ng-if="room.image">
-          <p id="roomLong">{{ room.long_desc }}</p>
-        </div>
-        <div ng-mousemove="showSelectedText()" id="largeTextBox" class="roomTextBox show-hide-large" ng-if="room.image">
-          <p id="roomLong">{{ room.long_desc }}</p>
-        </div>
+      <div id="smallToyBox" class="roomToyBox show-hide-small row">
+        <img id="toyOne" class="toy" src="{{ room.image }}"></img>
+        <img id="toyTwo" class="toy" src="{{ room.image }}"></img>
+        <img id="toyThree" class="toy" src="{{ room.image }}"></img>
+        <img id="toyFour" class="toy" src="{{ room.image }}"></img>
+        <img id="toyFive" class="toy" src="{{ room.image }}"></img>
+      </div>
+      <div id="largeToyBox" class="roomToyBox show-hide-large">
+        <img id="toyOne" class="toy" src="{{ room.image }}"></img>
+        <img id="toyTwo" class="toy" src="{{ room.image }}"></img>
+        <img id="toyThree" class="toy" src="{{ room.image }}"></img>
+        <img id="toyFour" class="toy" src="{{ room.image }}"></img>
+        <img id="toyFive" class="toy" src="{{ room.image }}"></img>
+      </div>
+      <span id="smallRoomImageBox" class="roomImageBox show-hide-small" ng-if="room.image">
+        <img class="roomImage" src="{{ room.image }}"></img>
+      </span>
+      <span id="largeRoomImageBox" class="roomImageBox show-hide-large" ng-if="room.image">
+        <img class="roomImage" src="{{ room.image }}"></img>
+      </span>
+      <div ng-mousemove="showSelectedText()" id="smallTextBox" class="roomTextBox show-hide-small" ng-if="room.image">
+        <p id="roomLong">{{ room.long_desc }}</p>
+      </div>
+      <div ng-mousemove="showSelectedText()" id="largeTextBox" class="roomTextBox show-hide-large" ng-if="room.image">
+        <p id="roomLong">{{ room.long_desc }}</p>
       </div>
       <div class="exitList show-hide-small col-xs-6 col-sm-6">
         <p>The obvious exits are:</p>
@@ -46,7 +44,6 @@
         </span>
       </div> <!-- End exitList small-->
       <div class="exitList show-hide-large">
-        <hr>
         <p>The obvious exits are:</p>
         <span class="exits" ng-if="room.exit.north">
           <span> North </span>
@@ -60,17 +57,16 @@
         <span class="exits" ng-if="room.exit.west">
           <span>West </span>
         </span>
-        <hr>
       </div> <!-- End exitList large-->
     </div> <!-- End specific room iteration -->
   </div> <!--  End all room iteration -->
 
   <div id="itemAndInput">
-    <div class="item-image-box">
+    <div class="item-box-image">
       <img id="item-image" src=""/>
     </div>
 
-    <div ng-bind="selectedText" class="item-box">
+    <div ng-bind="selectedText" class="item-box-text">
     </div>
 
     <div class="playerControls">
