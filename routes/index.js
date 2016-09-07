@@ -69,6 +69,18 @@ conn.once("open", function(){
       }
     });
   });
+
+  //update the lights
+  // router.update("/rooms/:roomname", function(req, res, next) {
+  //   conn.db.collection("rooms").find({}).toArray(function(err, docs) {
+  //     if (err) {
+  //       handleError(res, err.message, "Failed to get rooms.");
+  //     } else {
+  //       res.status(200).json(docs);
+  //     }
+  //   });
+  // });
+
 });
 
 module.exports = router;

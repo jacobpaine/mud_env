@@ -23,12 +23,14 @@
 
   .roomImage {
     width: 330px;
+    border: 2px solid pink;
   }
 
   .toy {
     display: inline-block;
     width: 55px;
     margin: 1px;
+    border: 1.5px dotted blue;
   }
 
   .exitList{
@@ -46,6 +48,13 @@
 
   .container {
     border: 3px solid black;
+
+  }
+
+  .view-box{
+    border: 3px solid black;
+    width: 50px;
+    height: 50px;
   }
 
 }
@@ -59,7 +68,7 @@
       display: inline-block !important;
     }
     div {
-      background-color: red;
+      background-color: none;
     }
 
     #largeRoomImageBox{
@@ -84,10 +93,13 @@
     .roomImage {
       margin-top: -210px;
       width: 100%;
+      border: 2px solid pink;
     }
     .toy{
       width: 75%;
       margin-bottom: 2px;
+      border: 1.5px dotted blue;
+
     }
     #roomLong {
       width: 100%;
@@ -99,8 +111,7 @@
     }
 
     .playerControls {
-      margin-top: -290px;
-      float: right;
+      display: inline-block;
     }
     .playerControls input{
       margin: 2px;
@@ -108,6 +119,24 @@
 
     .container {
       border: 3px solid black;
+    }
+
+    .item-box{
+    }
+
+    .item-image-box{
+    }
+
+    #item-image{
+      height: 10%;
+      width: 10%;
+    }
+
+    #itemAndInput {
+      border: 3px solid black;
+      width: 50%;
+      display: inline-block;
+      margin-top: -100%;
     }
 
 }

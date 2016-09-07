@@ -20,17 +20,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-
 app.set("view engine", "ejs");
 app.set("views", "./views");
-
-// if (!module.parent) {
-//   app.listen(3000);
-// }
-// var server = app.listen(process.env.PORT, function () {
-//   var port = server.address().port;
-//   console.log("App now running on port", port);
-// });
 
 app.listen(process.env.PORT || 3000, function(){
   console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);

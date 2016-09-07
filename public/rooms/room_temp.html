@@ -23,10 +23,10 @@
           <img id="toyFour" class="toy" src="{{ room.image }}"></img>
           <img id="toyFive" class="toy" src="{{ room.image }}"></img>
         </div>
-        <div id="smallTextBox" class="roomTextBox show-hide-small" ng-if="room.image">
+        <div ng-mousemove="showSelectedText()" id="smallTextBox" class="roomTextBox show-hide-small" ng-if="room.image">
           <p id="roomLong">{{ room.long_desc }}</p>
         </div>
-        <div id="largeTextBox" class="roomTextBox show-hide-large" ng-if="room.image">
+        <div ng-mousemove="showSelectedText()" id="largeTextBox" class="roomTextBox show-hide-large" ng-if="room.image">
           <p id="roomLong">{{ room.long_desc }}</p>
         </div>
       </div>
@@ -64,11 +64,21 @@
       </div> <!-- End exitList large-->
     </div> <!-- End specific room iteration -->
   </div> <!--  End all room iteration -->
-  <div class="playerControls">
-    <p>{{ gameMessage }}</p>
-    <form ng-submit="inputFunc(text)">
-      <p>Enter text and hit enter:</p>
-      <input id="primaryInputBox" type="text" ng-model="text" name="text" autofocus/>
-      <input type="submit" id="submit" value="Submit" />
-    </form>
+
+  <div id="itemAndInput">
+    <div class="item-image-box">
+      <img id="item-image" src=""/>
+    </div>
+
+    <div ng-bind="selectedText" class="item-box">
+    </div>
+
+    <div class="playerControls">
+      <p>{{ gameMessage }}</p>
+      <form ng-submit="inputFunc(text)">
+        <p>Enter text and hit enter:</p>
+        <input id="primaryInputBox" type="text" ng-model="text" name="text" autofocus/>
+        <input type="submit" id="submit" value="Submit" />
+      </form>
+    </div>
   </div>
