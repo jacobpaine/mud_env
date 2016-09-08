@@ -75,7 +75,6 @@ angular.module("contactsApp", ['ngRoute'])
         if (window.getSelection) {
           text = window.getSelection().toString();
           for ( image in $scope.thisRoom.itemImages) {
-            console.log("image", image, text);
             if (image === text){
               $scope.thisItemImage = $scope.thisRoom.itemImages[image].file;
               $scope.thisItemDesc = $scope.thisRoom.itemImages[image].description;
@@ -103,9 +102,15 @@ angular.module("contactsApp", ['ngRoute'])
       // This receives all input in the primaryInputBox
         $scope.inputFunc = function(text) {
           var thisRoomNumber = $routeParams.roomId;
+
+
+
+
           for ( prop in roomsData ) {
             var lights = roomsData[prop].lights;
             $scope.lights;
+
+
             if (roomsData[prop].roomName === "room"+thisRoomNumber){
               // This controls all available directions in the entire game.
               // The grid is plus/minus 1 horizontal & plus/minus 10 vertical.
@@ -115,7 +120,14 @@ angular.module("contactsApp", ['ngRoute'])
               // It also controls all the items in a room desc.
               // Likely the directions will be thrown into arrays later.
 
-              //lights
+              //Actions
+              var itemActions = roomsData[prop].itemActions;
+
+              function flipSwitch(msg) {
+                console.log("flipswitch called", msg);
+                $scope.gameMessage = msg;
+              }
+
               // Find the directions in the database.
               var northValue = roomsData[prop].exit.north;
               var southValue = roomsData[prop].exit.south;
@@ -127,7 +139,6 @@ angular.module("contactsApp", ['ngRoute'])
               var southKey = (text === 'south' || text === 's');
               var eastKey = (text === 'east' || text === 'e');
               var westKey = (text === 'west' || text === 'w');
-              var lookKey = ("look" || "l");
               // Error handling for blanks.
               if (text === undefined){
                 text = " ";
@@ -136,17 +147,51 @@ angular.module("contactsApp", ['ngRoute'])
               }
               var splitCmd = text.split(' ');
               var cmdKey = splitCmd[0];
+              var prepositionsBlackList = "at" || "the" || "a"
+              var objectKey;
+
               // Syntax handling for prepositions
-              // For 'look bear'
-              if (splitCmd[1] !== "at"){
-                var objectKey = splitCmd[1];
-              // For 'look at bear'
-              } else if (splitCmd[2] !== "the"){
-                var objectKey = splitCmd[2];
-              // For 'look at the bear'
-              } else {
-                var objectKey = splitCmd[3];
+              // For 'look at the bear', 'look at bear', & 'look bear'
+              if (splitCmd.length > 1) {
+                if (splitCmd.length >= 4) {
+                  objectKey = splitCmd[3];
+                  $scope.objectKey = objectKey;
+                } else if (splitCmd.length === 3) {
+                  objectKey = splitCmd[2];
+                  $scope.objectKey = objectKey;
+                } else if (splitCmd.length = 2) {
+                  objectKey = splitCmd[1];
+                  $scope.objectKey = objectKey;
+                }
               }
+
+              console.log("roomsData[prop]", roomsData[prop]);
+              console.log("roomsData[prop].itemActions", roomsData[prop].itemActions);
+
+              // function flipSwitch(msg) {
+              //   console.log("flipswitch called", msg);
+              //   $scope.gameMessage = msg;
+              // }
+              //
+              // for (action in itemActions) {
+              //   for (object in itemActions[action]){
+              //     if (action === cmdKey && object === objectKey ){
+              //         var msg = itemActions[action][object];
+              //         flipSwitch(msg)
+              //
+              //     }
+              //   }
+              // }
+
+              // Pseudo
+              // for thisRoomNumber
+              //   if (cmdText = thisRoomsPossibleActions) {
+              //     then flip the Boolean switch for that action
+              //   } else {
+              //     thisRoomsPossibleActions error msg
+              //   }
+
+
 
                 // If the input matches a possible direction from the database
               if (northKey && northValue === true){
@@ -165,13 +210,24 @@ angular.module("contactsApp", ['ngRoute'])
                 var newRoom = (room_num - 1).toString();
                 $location.path('rooms/' + newRoom);
                 return;
-              } else if ((cmdKey === lookKey) && objectKey ) {
-                $scope.gameMessage = roomsData[prop].item[objectKey];
-                return;
-              } else if (text === "push button"){
-                console.log("scope lights before", $scope.lights);
-                $scope.lights = !$scope.lights;
-                console.log("scope lights after", $scope.lights);
+              // } else if (text === "push button"){
+              //   $scope.lights = !$scope.lights;
+              //   if ($scope.lights === true) {
+              //     document.getElementById("largeToyBox").style.border = "thick solid #0000FF";
+              //   }
+              //   if ($scope.lights === false){
+              //     document.getElementById("largeToyBox").style.border = "";
+              //   }
+              } else if (text){
+                for (action in itemActions) {
+                  for (object in itemActions[action]){
+                    if (action === cmdKey && object === objectKey ){
+                        var msg = itemActions[action][object];
+                        flipSwitch(msg)
+                    }
+                  }
+                }
+
               } else {
                 $scope.gameMessage = "You can't do that.";
                 document.getElementById("primaryInputBox").value=null;

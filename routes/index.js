@@ -70,16 +70,36 @@ conn.once("open", function(){
     });
   });
 
-  //update the lights
-  // router.update("/rooms/:roomname", function(req, res, next) {
-  //   conn.db.collection("rooms").find({}).toArray(function(err, docs) {
+  // update the lights
+  router.put("/rooms/:roomname", function(req, res, next) {
+    var updateDoc = req.body;
+    delete updateDoc._id;
+
+    conn.db.collection("rooms").updateOne({_id: new ObjectID(req.params.id)}, updateDoc, function(err, docs) {
+      res.send('PUT request happens')
+      if (err) {
+        handleError(res, err.message, "Failed to get rooms.");
+      } else {
+        res.status(204).json(docs);
+      }
+    });
+  });
+  //
+  // app.put("/contacts/:id", function(req, res) {
+  //   var updateDoc = req.body;
+  //   delete updateDoc._id;
+  //
+  //   db.collection(CONTACTS_COLLECTION).updateOne({_id: new ObjectID(req.params.id)}, updateDoc, function(err, doc) {
   //     if (err) {
-  //       handleError(res, err.message, "Failed to get rooms.");
+  //       handleError(res, err.message, "Failed to update contact");
   //     } else {
-  //       res.status(200).json(docs);
+  //       res.status(204).end();
   //     }
   //   });
   // });
+
+
+
 
 });
 
