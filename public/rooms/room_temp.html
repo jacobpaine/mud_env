@@ -74,7 +74,7 @@
     </div>
         <div class="playerControls">
       <p>{{ gameMessage }}</p>
-      <form ng-submit="inputFunc(text)">
+      <form method="POST" ng-submit="inputFunc(text)">
         <p>Enter text and hit enter:</p>
         <input id="primaryInputBox" type="text" ng-model="text" name="text" autofocus/>
         <input type="submit" id="submit" value="Submit" />

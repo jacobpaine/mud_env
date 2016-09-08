@@ -70,20 +70,44 @@ conn.once("open", function(){
     });
   });
 
-  // update the lights
-  router.put("/rooms/:roomname", function(req, res, next) {
+  function handleError(res, reason, message, code) {
+    console.log("ERROR: " + reason);
+    res.status(code || 500).json({"error": message});
+  }
+  // FIX THE UPDATING !!! - Check Mongo Docs, possible example. likely typo
+  // update the room
+  router.put("/rooms/:id", function(req, res, next) {
+    res.send('PUT request happens')
     var updateDoc = req.body;
-    delete updateDoc._id;
-
-    conn.db.collection("rooms").updateOne({_id: new ObjectID(req.params.id)}, updateDoc, function(err, docs) {
-      res.send('PUT request happens')
+    // delete updateDoc._id;
+    conn.db.collection("rooms").updateOne({_id: req.params.id}, updateDoc, function(err, docs) {
       if (err) {
-        handleError(res, err.message, "Failed to get rooms.");
+        handleError(res, err.message, "Failed to get contacts.");
       } else {
-        res.status(204).json(docs);
+        res.status(200).json(docs);
       }
     });
   });
+
+
+  // app.put('/api/products/:id', function (req, res){
+  //   return ProductModel.findById(req.params.id, function (err, product) {
+  //     product.title = req.body.title;
+  //     product.description = req.body.description;
+  //     product.style = req.body.style;
+  //     return product.save(function (err) {
+  //       if (!err) {
+  //         console.log("updated");
+  //       } else {
+  //         console.log(err);
+  //       }
+  //       return res.send(product);
+  //     });
+  //   });
+  // });
+
+
+
   //
   // app.put("/contacts/:id", function(req, res) {
   //   var updateDoc = req.body;

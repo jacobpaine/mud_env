@@ -35,27 +35,37 @@ angular.module("contactsApp", ['ngRoute'])
                     alert("Error finding rooms.");
                 });
         }
-        this.getRoom = function(roomId) {
-          var url = "/rooms/" + roomId;
-          console.log("roomId", roomId);
-          return $http.get(url).
-              then(function(response) {
-                  return response;
-              }, function(response) {
-                  alert("Error finding this contact.");
-              });
+        this.editRoom = function(room) {
+            console.log("room", room);
+            var url = "/rooms/" + room._id;
+            console.log("url", url);
+            // var url = "/rooms/" + $scope._id;
+            // console.log("url", url);
+            return $http.put(url, room).
+                then(function(response) {
+                    return response;
+                }, function(response) {
+                    alert("Error editing this room.");
+                    console.log(response);
+                });
         }
+
+
+
     })
+
     .controller("FrontPageController", function($scope, $routeParams, $location){
       console.log("FrontPageController online");
     })
-    .controller("MoveController", function($scope, $routeParams, rooms, $location)  {
+
+    .controller("MoveController", function($scope, $routeParams, rooms, $location, RoomsService)  {
       var roomsData = rooms.data;
       console.log("rooms", rooms);
       var room_num = parseInt($routeParams.roomId, 10);
       $scope.room_id = $routeParams.roomId;
       $scope.rooms = rooms.data;
       $scope.room_num = parseInt($routeParams.roomId, 10);
+
 // Scopes the current room
       if (roomsData.roomName = $routeParams.roomId){
         for ( prop in roomsData ) {
@@ -65,6 +75,7 @@ angular.module("contactsApp", ['ngRoute'])
           }
         }
       }
+
 // Item box binding
       $scope.showSelectedText = function() {
         $scope.selectedText =  $scope.getSelectionText();
@@ -103,13 +114,9 @@ angular.module("contactsApp", ['ngRoute'])
         $scope.inputFunc = function(text) {
           var thisRoomNumber = $routeParams.roomId;
 
-
-
-
           for ( prop in roomsData ) {
-            var lights = roomsData[prop].lights;
-            $scope.lights;
-
+            // var lights = roomsData[prop].lights;
+            // $scope.lights;
 
             if (roomsData[prop].roomName === "room"+thisRoomNumber){
               // This controls all available directions in the entire game.
@@ -123,9 +130,14 @@ angular.module("contactsApp", ['ngRoute'])
               //Actions
               var itemActions = roomsData[prop].itemActions;
 
-              function flipSwitch(msg) {
-                console.log("flipswitch called", msg);
-                $scope.gameMessage = msg;
+              function flipSwitch(dial) {
+                $scope.gameMessage = dial.text;
+                dial.status = !dial.status
+              ////////////
+                // some kind of update function that sends the dial directly to the DB. ideally ONLY the boolean.
+                RoomsService.editRoom($scope.thisRoom);
+
+              ////////////
               }
 
               // Find the directions in the database.
@@ -149,7 +161,6 @@ angular.module("contactsApp", ['ngRoute'])
               var cmdKey = splitCmd[0];
               var prepositionsBlackList = "at" || "the" || "a"
               var objectKey;
-
               // Syntax handling for prepositions
               // For 'look at the bear', 'look at bear', & 'look bear'
               if (splitCmd.length > 1) {
@@ -164,35 +175,6 @@ angular.module("contactsApp", ['ngRoute'])
                   $scope.objectKey = objectKey;
                 }
               }
-
-              console.log("roomsData[prop]", roomsData[prop]);
-              console.log("roomsData[prop].itemActions", roomsData[prop].itemActions);
-
-              // function flipSwitch(msg) {
-              //   console.log("flipswitch called", msg);
-              //   $scope.gameMessage = msg;
-              // }
-              //
-              // for (action in itemActions) {
-              //   for (object in itemActions[action]){
-              //     if (action === cmdKey && object === objectKey ){
-              //         var msg = itemActions[action][object];
-              //         flipSwitch(msg)
-              //
-              //     }
-              //   }
-              // }
-
-              // Pseudo
-              // for thisRoomNumber
-              //   if (cmdText = thisRoomsPossibleActions) {
-              //     then flip the Boolean switch for that action
-              //   } else {
-              //     thisRoomsPossibleActions error msg
-              //   }
-
-
-
                 // If the input matches a possible direction from the database
               if (northKey && northValue === true){
                 var newRoom = (room_num + 10).toString();
@@ -222,12 +204,11 @@ angular.module("contactsApp", ['ngRoute'])
                 for (action in itemActions) {
                   for (object in itemActions[action]){
                     if (action === cmdKey && object === objectKey ){
-                        var msg = itemActions[action][object];
-                        flipSwitch(msg)
+                        var dial = itemActions[action][object];
+                        flipSwitch(dial)
                     }
                   }
                 }
-
               } else {
                 $scope.gameMessage = "You can't do that.";
                 document.getElementById("primaryInputBox").value=null;
