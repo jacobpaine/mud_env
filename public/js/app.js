@@ -74,21 +74,26 @@ angular.module("contactsApp", ['ngRoute'])
         var text = "";
         if (window.getSelection) {
           text = window.getSelection().toString();
-          for ( image in $scope.thisRoom) {
-            if (image = text){
-              $scope.thisItemImage = $scope.thisRoom[image];
+          for ( image in $scope.thisRoom.itemImages) {
+            console.log("image", image, text);
+            if (image === text){
+              $scope.thisItemImage = $scope.thisRoom.itemImages[image].file;
+              $scope.thisItemDesc = $scope.thisRoom.itemImages[image].description;
+              break;
             } else {
               $scope.thisItemImage = "../images/question.png";
+              $scope.thisItemDesc = "";
             }
           }
           if ($scope.thisItemImage === undefined){
             document.getElementById("item-image").src = "../images/question.png";
           } else {
-          document.getElementById("item-image").src= $scope.thisItemImage;
+            document.getElementById("item-image").src= $scope.thisItemImage;
+            document.getElementById("item-image-desc").src= $scope.thisItemDesc;
           }
         } else if (document.selection && document.selection.type != "Control") {
+            document.getElementById("item-image").src="../images/question.png";
             text = document.selection.createRange().text;
-            document.getElementById("item-image").src="../images/question.png"
         }
         return text;
       };

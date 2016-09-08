@@ -63,13 +63,16 @@
 
   <div id="itemAndInput">
     <div class="item-box-image">
-      <img id="item-image" src=""/>
+      <img id="item-image" src="{{ thisItemImage }}"/>
     </div>
+
+    <span id="item-image-desc">
+      {{ thisItemDesc }}
+    </span>
 
     <div ng-bind="selectedText" class="item-box-text">
     </div>
-
-    <div class="playerControls">
+        <div class="playerControls">
       <p>{{ gameMessage }}</p>
       <form ng-submit="inputFunc(text)">
         <p>Enter text and hit enter:</p>
