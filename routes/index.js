@@ -32,6 +32,20 @@ conn.once("open", function(){
     });
   });
 
+  // router.get("/rooms/:roomname", function(req, res, next) {
+  //   var roomId = req.params
+  //   console.log("roomId", roomId);
+  //   conn.db.collection("rooms")
+  //     .find({ "roomName": roomName})
+  //     .toArray(function(err, docs) {
+  //     if (err) {
+  //       handleError(res, err.message, "Failed to get rooms.");
+  //     } else {
+  //       res.status(200).json(docs);
+  //     }
+  //   });
+  // });
+
   //second parameter is multer middleware.
   router.post("/", upload.single("avatar"), function(req, res, next){
     //create a gridfs-stream into which we pipe multer's temporary file saved in uploads. After which we delete multer's temp file.
@@ -77,17 +91,21 @@ conn.once("open", function(){
   // FIX THE UPDATING !!! - Check Mongo Docs, possible example. likely typo
   // update the room
   router.put("/rooms/:id", function(req, res, next) {
-    res.send('PUT request happens')
-    var updateDoc = req.body;
-    // delete updateDoc._id;
-    conn.db.collection("rooms").updateOne({_id: req.params.id}, updateDoc, function(err, docs) {
-      if (err) {
-        handleError(res, err.message, "Failed to get contacts.");
-      } else {
-        res.status(200).json(docs);
+      var updateDoc = req.body;
+      delete updateDoc._id;
+
+  conn.db.rooms.findOneAndModify(
+    { "_id": ObjectId('57c47d0f50e5072309123e87')},
+    {$set: {"lights": false}, function(err, thing) {
+        if (err) {
+          handleError(res, err.message, "Failed to get contacts.");
+        } else {
+          res.status(200).json(docs);
+        }
       }
-    });
-  });
+    })
+});
+
 
 
   // app.put('/api/products/:id', function (req, res){
