@@ -1,6 +1,6 @@
 The third iteration of a prototype game template intended to create educational games. Using Mongo, Express, Angular, and NodeJS.
 
-Development is currently suspended until October 10th.
+Development is currently suspended indefinitely.
 
 
 Current Heroku pre-build at:
